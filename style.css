@@ -1,3 +1,4 @@
+/* PARAMETRI GENERALI DELLA PAGINA */
 *{
     margin: 0;
     padding: 0;
@@ -7,4 +8,20 @@
 
 body{
     background: #222;
+}
+
+/* --------------------------------------------------------------- */
+
+.card{
+    width: 90%;
+    max-width: 470px;
+    border: 1px solid black;
+    /* SFONDO SFUMATO */
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff;
+    /* 100PX DALL'ALTO, SX/DX SONO AUTO E 0PX DAL BASSO */
+    margin: 100px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
 }
