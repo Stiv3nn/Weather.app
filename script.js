@@ -14,7 +14,7 @@ async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     const data = await response.json();
 
-    console.log(data);
+    // console.log(data);
 
     // VISUALIZZARE I PARAEMTRI NECESSARI SU HTML TRAMITE I DATI PRESI DALLA CHIAMATA ASYNC SOPRA INDICATA
     document.querySelector(".city").innerHTML = data.name;
@@ -40,6 +40,8 @@ async function checkWeather(city) {
         weatherIcon.src = "images/mist.png";
     }
 
+    // QUANDO INSERISCO NELL'INPUT DELLA RICERCA UN NOME DI UNA CITTA' APPARE LA TENDINA CON LE INFO 
+    document.querySelector(".weather").style.display = "block";
 
 }
 
