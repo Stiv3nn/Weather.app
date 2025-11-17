@@ -12,36 +12,47 @@ const weatherIcon = document.querySelector(".weather-icon");
 // FUNZIONE ASINCRONA CON IL NOME CHECKWEATHER
 async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-    const data = await response.json();
 
-    // console.log(data);
+    // CONTROLLARE IL CODICE DI RISPOSTA
+    if (response.status == 404) {
+        document.querySelector(".error").style.display = "block";
+        document.querySelector(".weather").style.display = "none";
+    } else {
 
-    // VISUALIZZARE I PARAEMTRI NECESSARI SU HTML TRAMITE I DATI PRESI DALLA CHIAMATA ASYNC SOPRA INDICATA
-    document.querySelector(".city").innerHTML = data.name;
-    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C"; // ARROTONDARE I GRADI
-    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-    document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+        const data = await response.json();
 
-    // AGGIORNARE L'IMMAGINE METEO
-    if (data.weather[0].main == "Clouds") {
-        // AGGIORNA IL FILE SORGENTE
-        weatherIcon.src = "images/clouds.png";
-    }
-    else if (data.weather[0].main == "Clear") {
-        weatherIcon.src = "images/clear.png";
-    }
-    else if (data.weather[0].main == "Rain") {
-        weatherIcon.src = "images/rain.png";
-    }
-    else if (data.weather[0].main == "Drizzle") {
-        weatherIcon.src = "images/drizzle.png";
-    }
-    else if (data.weather[0].main == "Mist") {
-        weatherIcon.src = "images/mist.png";
-    }
+        // console.log(data);
 
-    // QUANDO INSERISCO NELL'INPUT DELLA RICERCA UN NOME DI UNA CITTA' APPARE LA TENDINA CON LE INFO 
-    document.querySelector(".weather").style.display = "block";
+        // VISUALIZZARE I PARAEMTRI NECESSARI SU HTML TRAMITE I DATI PRESI DALLA CHIAMATA ASYNC SOPRA INDICATA
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C"; // ARROTONDARE I GRADI
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+        // AGGIORNARE L'IMMAGINE METEO
+        if (data.weather[0].main == "Clouds") {
+            // AGGIORNA IL FILE SORGENTE
+            weatherIcon.src = "images/clouds.png";
+        }
+        else if (data.weather[0].main == "Clear") {
+            weatherIcon.src = "images/clear.png";
+        }
+        else if (data.weather[0].main == "Rain") {
+            weatherIcon.src = "images/rain.png";
+        }
+        else if (data.weather[0].main == "Drizzle") {
+            weatherIcon.src = "images/drizzle.png";
+        }
+        else if (data.weather[0].main == "Mist") {
+            weatherIcon.src = "images/mist.png";
+        }
+
+        // QUANDO INSERISCO NELL'INPUT DELLA RICERCA UN NOME DI UNA CITTA' APPARE LA TENDINA CON LE INFO 
+        document.querySelector(".weather").style.display = "block";
+
+        document.querySelector(".error").style.display = "none";
+
+    }
 
 }
 
