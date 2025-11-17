@@ -6,19 +6,39 @@ const apiUrl = "https://api.openweathermap.org/data/2.5/weather?uniits=metric&q=
 // QUANDO SI CLICCA IL BTN DI RICERCA, DOVREBBE INVIARE LE INFORMAZIONI SULLA CITTA' NELLA FUNZIONE DI CONTROLLO DEL METEO
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
+// VARIABILE PER L'AGGIORNAMENTO DELL'IMMAGINE
+const weatherIcon = document.querySelector(".weather-icon");
 
 // FUNZIONE ASINCRONA CON IL NOME CHECKWEATHER
 async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
     const data = await response.json();
 
-    // console.log(data);
+    console.log(data);
 
     // VISUALIZZARE I PARAEMTRI NECESSARI SU HTML TRAMITE I DATI PRESI DALLA CHIAMATA ASYNC SOPRA INDICATA
     document.querySelector(".city").innerHTML = data.name;
     document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C"; // ARROTONDARE I GRADI
     document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
     document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+
+    // AGGIORNARE L'IMMAGINE METEO
+    if (data.weather[0].main == "Clouds") {
+        // AGGIORNA IL FILE SORGENTE
+        weatherIcon.src = "images/clouds.png";
+    }
+    else if (data.weather[0].main == "Clear") {
+        weatherIcon.src = "images/clear.png";
+    }
+    else if (data.weather[0].main == "Rain") {
+        weatherIcon.src = "images/rain.png";
+    }
+    else if (data.weather[0].main == "Drizzle") {
+        weatherIcon.src = "images/drizzle.png";
+    }
+    else if (data.weather[0].main == "Mist") {
+        weatherIcon.src = "images/mist.png";
+    }
 
 
 }
